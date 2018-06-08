@@ -297,3 +297,7 @@ box-shadow: 0px 0px 0px rgba(225,225,225,0.5) inset,
 .tag_list {
     display: block;
 }
+
+textarea {
+  resize: none;
+}
