@@ -1,0 +1,48 @@
+body {
+    font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+    color:#630;
+    line-height:25px;
+    font-size:0.95em;
+    background-color: bisque;
+}
+
+#menu {
+    background-color: green;
+}
+
+#content {
+    background-color: indigo;
+    display: flex;
+}
+
+#menu-content {
+    background-color: indianred;
+    width: 400px;
+    justify-content: flex-end;
+}
+
+#main-content {
+    background-color: aqua;
+    display: flex;
+    flex-flow: row wrap;
+    flex: 1;
+    justify-content: space-around;
+}
+
+.card {
+    padding: 16px;
+    display: flex;
+}
+
+.cocktail-name {
+    background-color: aquamarine;
+    border: 1px solid #fff;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column; /* 子要素をflexboxにより縦方向に揃える */
+    justify-content: center; /* 子要素をflexboxにより中央に配置する */
+
+    width: 200px;
+    height: 300px;
+}
