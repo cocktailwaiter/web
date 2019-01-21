@@ -23,7 +23,11 @@ body {
 
 #menu-content {
     background-color: indianred;
-    width: 400px;
+    top: 0px;
+    position: sticky;
+    width: 30%;
+    max-width: 300px;
+    min-width: 200px;
     justify-content: flex-end;
 }
 
