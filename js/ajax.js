@@ -21,7 +21,7 @@ function init() {
 function getTagList() {
     return new Promise((resolve, reject) => {
         $.ajax({
-            url:'http://dev.api.cocktailwaiter.xyz:8888/v1/tags',
+            url:'http://api.cocktailwaiter.xyz/v1/tags',
             type:'GET',
             data:{
             }
@@ -41,7 +41,7 @@ function getTagList() {
 function getCocktailList(tags) {
     return new Promise((resolve, reject) => {
         $.ajax({
-            url:'http://dev.api.cocktailwaiter.xyz:8888/v1/cocktails/random',
+            url:'http://api.cocktailwaiter.xyz/v1/cocktails/random',
             type:'GET',
             data: {
                 'seed': '1'
