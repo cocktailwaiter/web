@@ -7,27 +7,34 @@ $(() => {
 });
 
 function init() {
-    getTagList()
-    .then((tags) => {
+    cocktail();
+    tag();
+}
+
+function tag() {
+    getInfoByApi('/v1/tags').then((tags) => {
         this.drawTags(tags);
     });
-    getCocktailList()
-    .then((cocktails) => {
+}
+
+function cocktail() {
+    let requestParams = {
+        seed: 1,
+        tags: [this.getParam('tags')]
+    };
+    getInfoByApi('/v1/cocktails', requestParams).then((cocktails) => {
         this.drawCocktails(cocktails);
     });
 }
 
-/**
- *  APIサーバからタグ情報を取得
- */
-function getTagList() {
+function getInfoByApi(endpoint, requestParams = {}) {
     return new Promise((resolve, reject) => {
-        let endpoint = '/v1/tags';
         let url = domain + endpoint;
 
         $.ajax({
             url: url,
             type: 'GET',
+            data: requestParams,
         })
         .done((request) => {
             resolve(request.data);
@@ -39,27 +46,11 @@ function getTagList() {
 }
 
 /**
- *  APIサーバからカクテル情報を取得
+ *  カクテルを描画する
  */
-function getCocktailList(tags) {
-    return new Promise((resolve, reject) => {
-        let tags = this.getParam('tags');
-        let endpoint = '/v1/cocktails';
-        let url = domain + endpoint;
-        $.ajax({
-            url: url,
-            type: 'GET',
-            data: {
-                seed: '1',
-                tags: [tags]
-            },
-        })
-        .done((request) => {
-            resolve(request.data);
-        })
-        .fail((data) => {
-            reject('error');
-        });
+function drawCocktails(cocktails) {
+    $.each(cocktails, (index, cocktail) => {
+        $(`<div class="card"><div class="cocktail-name">${cocktail.name}</div></div>`).appendTo(`#main-content`);
     });
 }
 
@@ -72,15 +63,6 @@ function drawTags(tags) {
         $(`<li><a href="?tags=${tag.name}">${tag.name}</a></li>`).appendTo(`#menu-content > ul`);
     });
     $(`</ul>`).appendTo(`#menu-content`);
-}
-
-/**
- *  カクテルを描画する
- */
-function drawCocktails(cocktails) {
-    $.each(cocktails, (index, cocktail) => {
-        $(`<div class="card"><div class="cocktail-name">${cocktail.name}</div></div>`).appendTo(`#main-content`);
-    });
 }
 
 function getParam(name, url) {
