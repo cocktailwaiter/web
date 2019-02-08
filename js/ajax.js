@@ -1,4 +1,4 @@
-var domain = 'http://api.cocktailwaiter.xyz';
+var domain = 'http://dev.api.cocktailwaiter.xyz:8888';
 
 $(() => {
     $(document).ready(() => {
@@ -18,10 +18,16 @@ function tag() {
 }
 
 function cocktail() {
-    let requestParams = {
-        seed: 1,
-        tags: [this.getParam('tags')]
-    };
+    let tags = this.getParam('tags');
+    let requestParams = {};
+
+    if (tags != null) {
+        requestParams = {
+            seed: 1,
+            tags: [this.getParam('tags')]
+        };
+    }
+
     getInfoByApi('/v1/cocktails', requestParams).then((cocktails) => {
         this.drawCocktails(cocktails);
     });
