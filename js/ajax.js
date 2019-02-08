@@ -1,4 +1,4 @@
-var domain = 'http://dev.api.cocktailwaiter.xyz:8888';
+var domain = 'http://api.cocktailwaiter.xyz';
 
 $(() => {
     $(document).ready(() => {
