@@ -9,6 +9,16 @@ body {
     overflow-y: hidden;
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 #menu {
     /* background-color: green; */
 }
@@ -30,6 +40,10 @@ body {
     min-width: 25%;
     justify-content: flex-end;
     color: aquamarine;
+}
+
+#menu-content > ul {
+    list-style: none;
 }
 
 #main-content {
