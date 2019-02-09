@@ -1,0 +1,90 @@
+body {
+    background-color: #110000;
+    font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+    color:#630;
+    line-height:25px;
+    font-size:0.95em;
+    /* background-color: bisque; */
+    margin: 0;
+    overflow-y: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#menu {
+    /* background-color: green; */
+}
+
+#content {
+    background: url("../img/top_img.jpg");
+    background-repeat:no-repeat;
+    background-size: 100%;
+    display: flex;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+#menu-content {
+    /* background-color: indianred; */
+    top: 0px;
+    position: sticky;
+    width: 300px;
+    min-width: 25%;
+    justify-content: flex-end;
+    color: aquamarine;
+}
+
+#menu-content > ul {
+    list-style: none;
+}
+
+#main-content {
+    /* background-color: aqua; */
+    display: flex;
+    flex-flow: row wrap;
+    flex: 1;
+    justify-content: space-around;
+}
+
+.card {
+    padding: 16px;
+    display: flex;
+}
+
+.cocktail-name {
+    color: aquamarine;
+    border: 1px solid #fff;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column; /* 子要素をflexboxにより縦方向に揃える */
+    justify-content: center; /* 子要素をflexboxにより中央に配置する */
+
+    width: 200px;
+    height: 300px;
+}
+
+header {
+    top: 0px;
+    position: sticky;
+}
+
+header > .title {
+    text-shadow: 3px 3px 3px #999999;
+    text-align: center;
+    background-color: #110000;
+}
+
+header > .title > a {
+    color: #fff;
+    font-family: Batang;
+    letter-spacing: 5px;
+}

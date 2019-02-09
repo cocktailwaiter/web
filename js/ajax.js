@@ -1,82 +1,82 @@
-$(function() {
-    $(document).ready(function(){
+var domain = 'http://api.cocktailwaiter.xyz';
+
+$(() => {
+    $(document).ready(() => {
         init();
     });
-
-    $('#fetch').on('click',function(){
-        addSearchTagName();
-        getCocktailList()
-            .then(function(cocktail_list) {
-                return proposalCocktail(cocktail_list);
-            });
-    });
-
 });
 
 function init() {
-    loadTagCategory();
+    cocktail();
+    tag();
 }
 
-function loadTagCategory() {
-    $.ajax({
-        url:'http://localhost:8000/api/v1/tag_category',
-        type:'GET',
-        data:{
-        }
-    })
-    .done((data) => {
-        $.each(data, function(index, tag_category) {
-            $(`
-                <li id="tag_category_id_${tag_category['id']}">
-                    <a href="#" class="tit">${tag_category['name']}</a>
-                    <ul id="tag_category_id_${tag_category['id']}_tags"></ul>
-                </li>
-            `).appendTo("#dropmenu");
-
-            $.each(tag_category['tags'], function(index, tag) {
-                $(`
-                    <label>
-                        <li>
-                        <input type="checkbox" value="${tag['id']}">${tag['name']}
-                        </li>
-                    </label>
-                `).appendTo(`#tag_category_id_${tag_category['id']}_tags`);
-            });
-        });
-    })
-    .fail( (data) => {
-    })
-    .always( (data) => {
+function tag() {
+    getInfoByApi('/v1/tags').then((tags) => {
+        this.drawTags(tags);
     });
 }
 
-function addSearchTagName(tag) {
-    tag_name = 'タグ名';
-    let tag_list = String($('#tag_list').val());
-    $('#tag_list').val(tag_list + tag_name + '\n');
+function cocktail() {
+    let tags = this.getParam('tags');
+    let requestParams = {};
+
+    if (tags != null) {
+        requestParams = {
+            seed: 1,
+            tags: [this.getParam('tags')]
+        };
+    }
+
+    getInfoByApi('/v1/cocktails', requestParams).then((cocktails) => {
+        this.drawCocktails(cocktails);
+    });
 }
 
-function getCocktailList(tags) {
-    return new Promise(function(resolve, reject) {
+function getInfoByApi(endpoint, requestParams = {}) {
+    return new Promise((resolve, reject) => {
+        let url = domain + endpoint;
+
         $.ajax({
-            url:'http://localhost:8000/api/v1/cocktail',
-            type:'GET',
-            data:{
-            }
+            url: url,
+            type: 'GET',
+            data: requestParams,
         })
-        .done((data) => {
-            resolve(data);
+        .done((request) => {
+            resolve(request.data);
         })
-        .fail( (data) => {
+        .fail((data) => {
             reject('error');
         });
     });
 }
 
-function proposalCocktail(cocktail_list) {
-    let proposal_cocktail_number = 0;
-    if (!!cocktail_list) {
-        let cocktail_name = cocktail_list[proposal_cocktail_number]['name'];
-        $('#proposal_cocktail_name').text(cocktail_name);
-    }
+/**
+ *  カクテルを描画する
+ */
+function drawCocktails(cocktails) {
+    $.each(cocktails, (index, cocktail) => {
+        $(`<div class="card"><div class="cocktail-name">${cocktail.name}</div></div>`).appendTo(`#main-content`);
+    });
+}
+
+/**
+ *  タグを描画する
+ */
+function drawTags(tags) {
+    $(`<ul>`).appendTo(`#menu-content`);
+    $.each(tags, (index, tag) => {
+        $(`<li><a href="?tags=${tag.name}">${tag.name}</a></li>`).appendTo(`#menu-content > ul`);
+    });
+    $(`</ul>`).appendTo(`#menu-content`);
+}
+
+function getParam(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
