@@ -46,6 +46,10 @@ a:hover {
     list-style: none;
 }
 
+#menu-content > ul > li {
+    padding-bottom: 9px;
+}
+
 #main-content {
     /* background-color: aqua; */
     display: flex;
@@ -60,6 +64,9 @@ a:hover {
 }
 
 .cocktail-name {
+    background: url("../img/liit.png");
+    background-size: 100% auto;
+
     color: aquamarine;
     border: 1px solid #fff;
     display: flex;
@@ -70,6 +77,10 @@ a:hover {
 
     width: 200px;
     height: 300px;
+}
+
+.cocktail-name:hover {
+    text-decoration: underline;
 }
 
 header {
@@ -87,4 +98,31 @@ header > .title > a {
     color: #fff;
     font-family: Batang;
     letter-spacing: 5px;
+}
+
+.tag {
+    padding: 0px 9px 0px 9px;
+    border: 1px solid aquamarine;
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    width: auto;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 50px;
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.66);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.28);
+}
+
+.tag:hover {
+    text-decoration: none;
+}
+
+.tag:active {
+    -webkit-transform: translateY(2px);
+    transform: translateY(5px);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
 }

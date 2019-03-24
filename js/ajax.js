@@ -56,7 +56,7 @@ function getInfoByApi(endpoint, requestParams = {}) {
  */
 function drawCocktails(cocktails) {
     $.each(cocktails, (index, cocktail) => {
-        $(`<div class="card"><div class="cocktail-name">${cocktail.name}</div></div>`).appendTo(`#main-content`);
+        $(`<div class="card"><a href="https://ja.wikipedia.org/wiki/${cocktail.name}"><div class="cocktail-name">${cocktail.name}</div></div>`).appendTo(`#main-content`);
     });
 }
 
@@ -66,7 +66,7 @@ function drawCocktails(cocktails) {
 function drawTags(tags) {
     $(`<ul>`).appendTo(`#menu-content`);
     $.each(tags, (index, tag) => {
-        $(`<li><a href="?tags=${tag.name}">${tag.name}</a></li>`).appendTo(`#menu-content > ul`);
+        $(`<li><a href="?tags=${tag.name}" class="tag">${tag.name}</a></li>`).appendTo(`#menu-content > ul`);
     });
     $(`</ul>`).appendTo(`#menu-content`);
 }
