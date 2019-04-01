@@ -8,6 +8,7 @@
   <title>Cocktail Waiter</title>
   <script src="js/jquery-1.11.3.min.js"></script>
   <script src="js/ajax.js"></script>
+  <script src="js/modal.js"></script>
   <style type="text/css">
     @import url("css/main-style.css");
   </style>
@@ -20,8 +21,16 @@
 
   <article id="content">
     <section id="main-content"></section>
-    <section id="menu-content"></section>
+    <article id="menu-content">
+      <section id="popular-tag-view"></section>
+      <section id="all-tag-view" class="modal-open">
+        <ul><li><a class="button">すべてのタグを表示</a></li></ul>
+      </section>
+    </article>
   </article>
+
+  <div id="modal-main"></div>
+
 </body>
 
 </html>
