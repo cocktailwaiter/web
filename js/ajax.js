@@ -8,12 +8,19 @@ $(() => {
 
 function init() {
     cocktail();
-    tag();
+    popularTag();
+    allTag();
 }
 
-function tag() {
+function allTag() {
     getInfoByApi('/v1/tags').then((tags) => {
-        this.drawTags(tags);
+        this.drawAllTags(tags);
+    });
+}
+
+function popularTag() {
+    getInfoByApi('/v1/tags/popular').then((tags) => {
+        this.drawPopularTags(tags);
     });
 }
 
@@ -56,19 +63,33 @@ function getInfoByApi(endpoint, requestParams = {}) {
  */
 function drawCocktails(cocktails) {
     $.each(cocktails, (index, cocktail) => {
-        $(`<div class="card"><a href="https://ja.wikipedia.org/wiki/${cocktail.name}"><div class="cocktail-name">${cocktail.name}</div></div>`).appendTo(`#main-content`);
+        $(`
+            <div class="card">
+            <div id="contents" class="card">
+                <a href="https://ja.wikipedia.org/wiki/${cocktail.name}">
+                <div class="cocktail-name">${cocktail.name}</div>
+            </div>
+        `).appendTo(`#main-content`);
     });
 }
 
 /**
  *  タグを描画する
  */
-function drawTags(tags) {
-    $(`<ul>`).appendTo(`#menu-content`);
+function drawPopularTags(tags) {
+    $(`<ul>`).appendTo(`#popular-tag-view`);
     $.each(tags, (index, tag) => {
-        $(`<li><a href="?tags=${tag.name}" class="tag">${tag.name}</a></li>`).appendTo(`#menu-content > ul`);
+        $(`<li><a href="?tags=${tag.name}" class="tag button">${tag.name}</a></li>`).appendTo(`#popular-tag-view > ul`);
     });
-    $(`</ul>`).appendTo(`#menu-content`);
+    $(`</ul>`).appendTo(`#popular-tag-view`);
+}
+
+function drawAllTags(tags) {
+    $(`<div>`).appendTo(`#modal-main`);
+    $.each(tags, (index, tag) => {
+        $(`<span><a href="?tags=${tag.name}" class="tag-view button">${tag.name}</a></span>`).appendTo(`#modal-main > div`);
+    });
+    $(`</div>`).appendTo(`#modal-main`);
 }
 
 function getParam(name, url) {
