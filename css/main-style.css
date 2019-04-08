@@ -64,9 +64,6 @@ a:hover {
 }
 
 .cocktail-name {
-    background: url("../img/liit.png");
-    background-size: 100% auto;
-
     color: aquamarine;
     border: 1px solid #fff;
     display: flex;
@@ -74,9 +71,13 @@ a:hover {
     align-items: center;
     flex-direction: column; /* 子要素をflexboxにより縦方向に揃える */
     justify-content: center; /* 子要素をflexboxにより中央に配置する */
-
     width: 200px;
     height: 300px;
+}
+
+.cocktail-name img {
+    width: 85%;
+    height: 85%;
 }
 
 .cocktail-name:hover {

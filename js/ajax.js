@@ -1,4 +1,4 @@
-var domain = 'https://api.cocktailwaiter.xyz';
+const cocktail_tag_color_id = 4;
 
 $(() => {
     $(document).ready(() => {
@@ -63,11 +63,16 @@ function getInfoByApi(endpoint, requestParams = {}) {
  */
 function drawCocktails(cocktails) {
     $.each(cocktails, (index, cocktail) => {
+        let cocktail_img_path = this.getImagePath(cocktail);
         $(`
             <div class="card">
             <div id="contents" class="card">
                 <a href="https://ja.wikipedia.org/wiki/${cocktail.name}">
-                <div class="cocktail-name">${cocktail.name}</div>
+                    <div class="cocktail-name">
+                        <img src="${cocktail_img_path}">
+                        <span>${cocktail.name}</span>
+                    </div>
+                </a>
             </div>
         `).appendTo(`#main-content`);
     });
@@ -90,6 +95,50 @@ function drawAllTags(tags) {
         $(`<span><a href="?tags=${tag.name}" class="tag-view button">${tag.name}</a></span>`).appendTo(`#modal-main > div`);
     });
     $(`</div>`).appendTo(`#modal-main`);
+}
+
+function getImagePath(cocktail) {
+    let baseImagePath = './img';
+    let imageName = 'cocktail-color-unknown.png';
+    if (!!cocktail.tags) {
+        $.each(cocktail.tags, (index, tag) => {
+            if (!tag.tag_category) {
+                return true; // continue
+            }
+
+            let category = tag.tag_category;
+            if (category.id === cocktail_tag_color_id) {
+                switch (tag.name) {
+                    case '緑':
+                        imageName = 'cocktail-color-green.png';
+                        break;
+                    case '青':
+                        imageName = 'cocktail-color-blue.png';
+                        break;
+                    case '黒':
+                        imageName = 'cocktail-color-black.png';
+                        break;
+                    case '赤':
+                        imageName = 'cocktail-color-red.png';
+                        break;
+                    case '透明':
+                    case '白い':
+                    case '白':
+                        imageName = 'cocktail-color-transparent.png';
+                        break;
+                    case 'オレンジ':
+                    case '黄色':
+                    case '黄':
+                        imageName = 'cocktail-color-yellow.png';
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+    }
+
+    return baseImagePath + '/' + imageName;
 }
 
 function getParam(name, url) {
