@@ -67,7 +67,11 @@ function drawCocktails(cocktails) {
             <div class="card">
             <div id="contents" class="card">
                 <a href="https://ja.wikipedia.org/wiki/${cocktail.name}">
-                <div class="cocktail-name">${cocktail.name}</div>
+                    <div class="cocktail-name">
+                        <img src="./img/liit.png">
+                        <span>${cocktail.name}</span>
+                    </div>
+                </a>
             </div>
         `).appendTo(`#main-content`);
     });
