@@ -8,9 +8,11 @@
   <title>Cocktail Waiter</title>
   <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
   <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
   <script src="js/ajax.js"></script>
   <script src="js/modal.js"></script>
   <style type="text/css">
+    @import url("css/bootstrap.min.css");
     @import url("css/main-style.css");
   </style>
 </head>
@@ -19,12 +21,29 @@
   <header>
     <h1 class="title"><a href="index.html"><span>COCKTAIL WAITER</span></a></h1>
   </header>
+  <!-- モーダル・ダイアログ -->
+  <div class="modal" id="cocktail-detail-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" style="background-color: black; color:aquamarine;">
+        <div class="modal-header">
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <span id="cocktail-tag"></span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+          <!-- <button type="button" class="btn btn-primary">ボタン</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
 
   <article id="content">
     <section id="main-content"></section>
     <article id="menu-content">
       <section id="popular-tag-view"></section>
-      <section id="all-tag-view" class="modal-open">
+      <section id="all-tag-view" class="all-tag-modal-open">
         <ul><li><a class="button">すべてのタグを表示</a></li></ul>
       </section>
     </article>

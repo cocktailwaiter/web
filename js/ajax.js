@@ -1,4 +1,5 @@
-const cocktail_tag_color_id = 4;
+const cocktail_tag_color_id = 3;
+var domain = 'http://api.cocktailwaiter.xyz';
 
 $(() => {
     $(document).ready(() => {
@@ -35,7 +36,7 @@ function cocktail() {
         };
     }
 
-    getInfoByApi('/v1/cocktails', requestParams).then((cocktails) => {
+    getInfoByApi('/v1/cocktails/random', requestParams).then((cocktails) => {
         this.drawCocktails(cocktails);
     });
 }
@@ -65,14 +66,16 @@ function drawCocktails(cocktails) {
     $.each(cocktails, (index, cocktail) => {
         let cocktail_img_path = this.getImagePath(cocktail);
         $(`
-            <div class="card">
-            <div id="contents" class="card">
-                <a href="https://ja.wikipedia.org/wiki/${cocktail.name}">
-                    <div class="cocktail-name">
-                        <img src="${cocktail_img_path}">
-                        <span>${cocktail.name}</span>
-                    </div>
-                </a>
+            <div id="contents" class="card" style="background-color: transparent;">
+                <div class="cocktail-name"
+                    data-toggle="modal" data-target="#cocktail-detail-modal"
+                    data-recipient="${cocktail.name}"
+                    data-cocktail="${cocktail.id}"
+                    data-tag="${cocktail.tag}"
+                >
+                    <img src="${cocktail_img_path}">
+                    <span>${cocktail.name}</span>
+                </div>
             </div>
         `).appendTo(`#main-content`);
     });
