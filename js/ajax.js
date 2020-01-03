@@ -1,4 +1,4 @@
-const cocktail_tag_color_id = 3;
+const COCKTAIL_TAG_COLOR_ID = 3;
 var domain = 'http://api.cocktailwaiter.xyz';
 
 $(() => {
@@ -50,12 +50,12 @@ function getInfoByApi(endpoint, requestParams = {}) {
             type: 'GET',
             data: requestParams,
         })
-        .done((request) => {
-            resolve(request.data);
-        })
-        .fail((data) => {
-            reject('error');
-        });
+            .done((request) => {
+                resolve(request.data);
+            })
+            .fail((data) => {
+                reject('error');
+            });
     });
 }
 
@@ -110,32 +110,19 @@ function getImagePath(cocktail) {
             }
 
             let category = tag.tag_category;
-            if (category.id === cocktail_tag_color_id) {
-                switch (tag.name) {
-                    case '緑':
-                        imageName = 'cocktail-color-green.png';
-                        break;
-                    case '青':
-                        imageName = 'cocktail-color-blue.png';
-                        break;
-                    case '黒':
-                        imageName = 'cocktail-color-black.png';
-                        break;
-                    case '赤':
-                        imageName = 'cocktail-color-red.png';
-                        break;
-                    case '透明':
-                    case '白い':
-                    case '白':
-                        imageName = 'cocktail-color-transparent.png';
-                        break;
-                    case 'オレンジ':
-                    case '黄色':
-                    case '黄':
-                        imageName = 'cocktail-color-yellow.png';
-                        break;
-                    default:
-                        break;
+            if (category.id === COCKTAIL_TAG_COLOR_ID) {
+                if ((/緑|黄緑/g).test(tag.name)) {
+                    imageName = 'cocktail-color-green.png';
+                } else if ((/青|空/g).test(tag.name)) {
+                    imageName = 'cocktail-color-blue.png';
+                } else if ((/黒|茶|琥珀/g).test(tag.name)) {
+                    imageName = 'cocktail-color-black.png';
+                } else if ((/赤|紅|ピンク|桃/g).test(tag.name)) {
+                    imageName = 'cocktail-color-red.png';
+                } else if ((/オレンジ|黄|ブラウン|橙/g).test(tag.name)) {
+                    imageName = 'cocktail-color-yellow.png';
+                } else if ((/透明|白|無/g).test(tag.name)) {
+                    imageName = 'cocktail-color-transparent.png';
                 }
             }
         });
