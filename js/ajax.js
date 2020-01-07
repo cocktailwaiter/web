@@ -1,5 +1,5 @@
 const COCKTAIL_TAG_COLOR_ID = 3;
-var domain = 'http://api.cocktailwaiter.xyz';
+var domain = 'https://api.cocktailwaiter.xyz';
 
 $(() => {
     $(document).ready(() => {
