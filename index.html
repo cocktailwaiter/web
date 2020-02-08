@@ -2,11 +2,24 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="あなたの『飲んでみたいお酒』を探す手助けになるかもしれません。">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>カクテル・ウェイター</title>
+  <meta http-equiv="content-language" content="ja">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="default-style" content="css/main.css">
+  <meta name="description" content="お酒の特徴からカクテルを探すサービス。あなたの『飲んでみたいお酒』を探す手助けになるかもしれません。">
+  <meta name="keywords" content="カクテル,cocktail,ウェイター,waiter,検索,search,酒,特徴">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="特徴から探すカクテル検索サービス カクテル・ウェイター">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+  <meta property="og:description" content="お酒の特徴からカクテルを探すサービス。あなたの『飲んでみたいお酒』を探す手助けになるかもしれません。">
+  <meta property="og:image" content="img/og_image.png">
+  <meta property="og:image:alt" content="Cocktail Waiter">
+  <meta property="og:site_name" content="特徴から探すカクテル検索サービス カクテル・ウェイター">
+  <meta property="og:title" content="特徴から探すカクテル検索サービス カクテル・ウェイター">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cocktailwaiter.xyz">
+
+  <title>特徴から探すカクテル検索サービス カクテル・ウェイター</title>
   <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
   <script src="js/jquery-1.11.3.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
@@ -20,7 +33,9 @@
 
 <body>
   <header>
-    <h1 class="title"><a href="index.html"><span>COCKTAIL WAITER</span></a></h1>
+    <h1 class="title">
+      <a href="index.html"><span>カクテル・ウェイター</span><img src="img/logo-glass.png" style="padding-bottom: 6px;"></a>
+    </h1>
   </header>
   <!-- モーダル・ダイアログ -->
   <div class="modal" id="cocktail-detail-modal" tabindex="-1">
@@ -43,10 +58,10 @@
   <article id="content">
     <section id="main-content"></section>
     <article id="menu-content">
-      <section id="popular-tag-view"></section>
       <section id="all-tag-view" class="all-tag-modal-open">
-        <ul><li><a class="button">すべてのタグを表示</a></li></ul>
+        <ul><li><a class="button">すべての 特徴 を表示</a></li></ul>
       </section>
+      <section id="popular-tag-view"></section>
     </article>
   </article>
 
