@@ -20,7 +20,7 @@ function allTag() {
 }
 
 function popularTag() {
-    getInfoByApi('/v1/tags/popular').then((tags) => {
+    getInfoByApi('/v1/tags').then((tags) => {
         this.drawPopularTags(tags);
     });
 }
@@ -86,7 +86,7 @@ function drawCocktails(cocktails) {
  */
 function drawPopularTags(tags) {
     $(`<ul>`).appendTo(`#popular-tag-view`);
-    $.each(tags, (index, tag) => {
+    $.each(tags.slice(1, 15), (index, tag) => {
         $(`<li><a href="?tags=${tag.name}" class="tag button">${tag.name}</a></li>`).appendTo(`#popular-tag-view > ul`);
     });
     $(`</ul>`).appendTo(`#popular-tag-view`);
