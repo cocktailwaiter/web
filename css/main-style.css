@@ -149,13 +149,16 @@ header > .title > a {
 #modal-main {
   display: none;
   width: 500px;
-  height: 385px;
   margin: 0;
   padding: 0;
   color: aquamarine;
   background-color: #666666;
   position:fixed;
   z-index: 2;
+}
+
+#modal-main > div {
+    margin-bottom: 10px;
 }
 
 /* モーダル 背景エリア */
@@ -182,3 +185,20 @@ header > .title > a {
 .tag-view {
   margin: 9px 0 0 9px;
 }
+
+@media (max-width: 576px) {
+    /* 横幅が576px以下の場合に適用するスタイル */
+    .title {
+        font-size: 1.5rem;
+        height: 2.5rem;
+    }
+
+    #menu-content {
+        font-size: 75%;
+    }
+
+    #modal-main {
+        font-size: 75%;
+        width: 90%;
+    }
+ }
