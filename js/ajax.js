@@ -1,5 +1,6 @@
 const COCKTAIL_TAG_COLOR_ID = 3;
-var domain = 'https://api.cocktailwaiter.xyz';
+const SESSION_KEY_NAME = 'session'
+const DOMAIN = 'http://api.cocktailwaiter.xyz';
 
 $(() => {
     $(document).ready(() => {
@@ -8,10 +9,59 @@ $(() => {
 });
 
 function init() {
+    if (navigator.cookieEnabled) {
+        if (!existsSession()) {
+            setSession(generateRandomString(64))
+        }
+    }
+
     cocktail();
     popularTag();
     allTag();
 }
+
+function existsSession() {
+    return existsCookie(SESSION_KEY_NAME)
+}
+
+function setSession(sessionValue) {
+    document.cookie = SESSION_KEY_NAME + "=" + sessionValue
+}
+
+function generateRandomString(len) {
+    return btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(len)))).substring(0, len)
+}
+
+function existsCookie(targetCookieKey) {
+    const cookies = document.cookie;
+    const cookiesArray = cookies.split(';');
+    let isExists = false
+
+    for (let c of cookiesArray) {
+        let cArray = c.split('=');
+        if (cArray[0] == targetCookieKey) {
+            isExists = true
+        }
+    }
+
+    return isExists
+}
+
+function getSession() {
+    const cookies = document.cookie;
+    const cookiesArray = cookies.split(';');
+    let session = null
+
+    for (let c of cookiesArray) {
+        let cArray = c.split('=');
+        if (cArray[0] == SESSION_KEY_NAME) {
+            session = cArray[1]
+        }
+    }
+
+    return session
+}
+
 
 function allTag() {
     getInfoByApi('/v1/tags').then((tags) => {
@@ -43,7 +93,8 @@ function cocktail() {
 
 function getInfoByApi(endpoint, requestParams = {}) {
     return new Promise((resolve, reject) => {
-        let url = domain + endpoint;
+        let url = DOMAIN + endpoint;
+        requestParams['session'] = getSession()
 
         $.ajax({
             url: url,
@@ -140,3 +191,4 @@ function getParam(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
+
